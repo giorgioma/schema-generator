@@ -651,6 +651,8 @@ class TypesGenerator
                 'name' => $isArray ? Inflector::pluralize($propertyName) : Inflector::singularize($propertyName),
                 'resource' => $property,
                 'range' => $ranges[0],
+                'mappedBy' => $propertyConfig['mappedBy'] ?? null,
+                'inversedBy' => $propertyConfig['inversedBy'] ?? null,
                 'cardinality' => $cardinality,
                 'ormColumn' => $propertyConfig['ormColumn'] ?? null,
                 'isArray' => $isArray,
