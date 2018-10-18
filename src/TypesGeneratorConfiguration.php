@@ -170,6 +170,8 @@ final class TypesGeneratorConfiguration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('range')->defaultNull()->info('The property range')->example('Offer')->end()
+                                        ->scalarNode('mappedBy')->defaultNull()->info('The mappedBy doctrine annotation property')->example('Offer')->end()
+                                        ->scalarNode('inversedBy')->defaultNull()->info('The inversedBy doctrine annotation property')->example('Offer')->end()
                                         ->scalarNode('relationTableName')->defaultNull()->info('The relation table name')->example('organization_member')->end()
                                         ->enumNode('cardinality')->defaultValue(CardinalitiesExtractor::CARDINALITY_UNKNOWN)->values([
                                             CardinalitiesExtractor::CARDINALITY_0_1,

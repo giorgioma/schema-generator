@@ -174,7 +174,14 @@ final class DoctrineOrmAnnotationGenerator extends AbstractAnnotationGenerator
                     $annotations[] = '@ORM\JoinTable('.$name.'inverseJoinColumns={@ORM\JoinColumn(nullable=false, unique=true)})';
                     break;
                 case CardinalitiesExtractor::CARDINALITY_N_N:
-                    $annotations[] = sprintf('@ORM\ManyToMany(targetEntity="%s")', $this->getRelationName($field['range']));
+                    $annotation = sprintf('@ORM\ManyToMany(targetEntity="%s")', $this->getRelationName($field['range']));
+                    if($field['mappedBy']) {
+                        $annotation = sprintf('@ORM\ManyToMany(targetEntity="%s", mappedBy="%s")', $this->getRelationName($field['range']), $field['mappedBy']);
+                    }
+                    if($field['inversedBy']) {
+                        $annotation = sprintf('@ORM\ManyToMany(targetEntity="%s", inversedBy="%s")', $this->getRelationName($field['range']), $field['inversedBy']);
+                    }
+                    $annotations[] = $annotation;
                     if ($field['relationTableName']) {
                         $annotations[] = sprintf('@ORM\JoinTable(name="%s")', $field['relationTableName']);
                     }
